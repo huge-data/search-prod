@@ -20,6 +20,7 @@ PROJECT_DIR=`cd "$PRGDIR/.." >/dev/null; pwd`
 #echo PROJECT_DIR=$PROJECT_DIR
 
 BASE_DIR="~/solr-cloud/"
+SOLR_VERSION = "4.8.0"
 
 usage() {
   echo >&2 "Usage: $PRG <command> [args]"
@@ -38,7 +39,7 @@ install() {
 start() {
     MASTER=`cat solr_master`;
     echo $MASTER": start master ...";
-    ssh $MASTER "cd solr-cloud/solr-4.7.0;java -Xms6072M -Xmx6072M -Dbootstrap_confdir=./solr/sentiment/conf -Dcollection.configName=zxsoft -DnumShards=3 -DzkHost=hdp321:2181,hdp322:2181,hdp323:2181 -jar start.jar &" &
+    ssh $MASTER "cd solr-cloud/solr-"$SOLR_VERSION";java -Xms6072M -Xmx6072M -Dbootstrap_confdir=./solr/sentiment/conf -Dcollection.configName=zxsoft -DnumShards=3 -DzkHost=hdp321:2181,hdp322:2181,hdp323:2181 -jar start.jar &" &
     echo "sleeping ..."
 
     for ((i=60;i>0;i--))
@@ -49,7 +50,7 @@ start() {
     for i in `cat solr_slaves`;
     do
         echo $i": start slave ...";
-        ssh $i "cd solr-cloud/solr-4.7.0;java -Xms6072M -Xmx6072M -DzkHost=hdp321:2181,hdp322:2181,hdp323:2181 -jar start.jar &" &
+        ssh $i "cd solr-cloud/solr-"$SOLR_VERSION";java -Xms6072M -Xmx6072M -DzkHost=hdp321:2181,hdp322:2181,hdp323:2181 -jar start.jar &" &
     done;
 }
 
@@ -74,7 +75,7 @@ deldata() {
     for i in `cat $@`;
     do 
         echo $i": deldata ...";
-        ssh $i "rm -r "$BASE_DIR"solr_data;rm -r "$BASE_DIR"solr_ulogs;rm -r "$BASE_DIR"solr_request_logs/*;rm -r "$BASE_DIR"solr-4.7.0/logs;rm -r "$BASE_DIR"solr-4.7.0/solr-webapp";
+        ssh $i "rm -r "$BASE_DIR"solr_data;rm -r "$BASE_DIR"solr_ulogs;rm -r "$BASE_DIR"solr_request_logs/*;rm -r "$BASE_DIR"solr_logs;rm -r "$BASE_DIR"solr_webapp";
     done;
 }
 
