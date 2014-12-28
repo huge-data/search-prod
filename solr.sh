@@ -37,7 +37,7 @@ install() {
 }
 
 start() {
-    MASTER=`cat solr_master`;
+    MASTER=`cat master`;
     echo $MASTER": start master ...";
     ssh $MASTER "cd solr-cloud/solr-"$SOLR_VERSION";java -Xms8192M -Xmx10240M -Dbootstrap_confdir=./solr/sentiment/conf -Dcollection.configName=zxsoft -DnumShards=6 -DzkHost=zxsofthadoop01:2181,zxsofthadoop02:2181,zxsofthadoop03:2181,zxsofthadoop04:2181,zxsofthadoop05:2181,zxsofthadoop06:2181 -jar start.jar &" &
     echo "sleeping ..."
@@ -47,7 +47,7 @@ start() {
         echo "After "$i" seconds, it will start slaves ...";sleep 1;
     done
 
-    for i in `cat solr_slaves`;
+    for i in `cat slaves`;
     do
         echo $i": start slave ...";
         ssh $i "cd solr-cloud/solr-"$SOLR_VERSION";java -Xms8192M -Xmx10240M -DzkHost=zxsofthadoop01:2181,zxsofthadoop02:2181,zxsofthadoop03:2181,zxsofthadoop04:2181,zxsofthadoop05:2181,zxsofthadoop06:2181 -jar start.jar &" &
