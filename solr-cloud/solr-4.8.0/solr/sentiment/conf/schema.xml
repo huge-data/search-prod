@@ -193,13 +193,13 @@
    <field name="type" type="text_zh" indexed="true" stored="true" multiValued="false" />
    <field name="isharmful" type="boolean" indexed="true" stored="true" multiValued="false" />
    <field name="content" type="text_zh" indexed="true" stored="true" multiValued="false" />
-   <field name="comment_count" type="int" indexed="false" stored="true" multiValued="false" />
+   <field name="comment_count" type="int" indexed="true" stored="true" multiValued="false" />
    <field name="read_count" type="int" indexed="false" stored="true" multiValued="false" />
    <field name="favorite_count" type="int" indexed="false" stored="true" multiValued="false" />
    <field name="attitude_count" type="int" indexed="false" stored="true" multiValued="false" />
-   <field name="repost_count" type="int" indexed="false" stored="true" multiValued="false" />
+   <field name="repost_count" type="int" indexed="true" stored="true" multiValued="false" />
    <field name="video_url" type="string" indexed="false" stored="true" multiValued="false" />
-   <field name="pic_url" type="string" indexed="false" stored="true" multiValued="false" />
+   <field name="pic_url" type="string" indexed="true" stored="true" multiValued="false" />
    <field name="voice_url" type="string" indexed="false" stored="true" multiValued="false" />
    <field name="timestamp" type="date" indexed="true" stored="true" multiValued="false" />
    <field name="source_id" type="int" indexed="true" stored="true" multiValued="false" />
