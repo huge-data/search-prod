@@ -1,7 +1,7 @@
 
 # 大数据搜索服务项目
 
-> 基于Java实现，solr版本为4.10.2。
+> 基于Java实现，solr版本为5.1.0。
 
 ## 一、ZookeeperCloud
 
