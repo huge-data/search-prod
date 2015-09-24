@@ -193,13 +193,13 @@
    <field name="type" type="text_zh" indexed="true" stored="true" multiValued="false" />
    <field name="isharmful" type="boolean" indexed="true" stored="true" multiValued="false" />
    <field name="content" type="text_zh" indexed="true" stored="true" multiValued="false" />
-   <field name="comment_count" type="int" indexed="false" stored="true" multiValued="false" />
+   <field name="comment_count" type="int" indexed="true" stored="true" multiValued="false" />
    <field name="read_count" type="int" indexed="false" stored="true" multiValued="false" />
    <field name="favorite_count" type="int" indexed="false" stored="true" multiValued="false" />
    <field name="attitude_count" type="int" indexed="false" stored="true" multiValued="false" />
-   <field name="repost_count" type="int" indexed="false" stored="true" multiValued="false" />
+   <field name="repost_count" type="int" indexed="true" stored="true" multiValued="false" />
    <field name="video_url" type="string" indexed="false" stored="true" multiValued="false" />
-   <field name="pic_url" type="string" indexed="false" stored="true" multiValued="false" />
+   <field name="pic_url" type="string" indexed="true" stored="true" multiValued="false" />
    <field name="voice_url" type="string" indexed="false" stored="true" multiValued="false" />
    <field name="timestamp" type="date" indexed="true" stored="true" multiValued="false" />
    <field name="source_id" type="int" indexed="true" stored="true" multiValued="false" />
@@ -224,6 +224,7 @@
    <field name="city_code" type="int" indexed="true" stored="true" multiValued="false" />
    <field name="latitude" type="tdouble" indexed="true" stored="true" multiValued="false" />
    <field name="longitude" type="tdouble" indexed="true" stored="true" multiValued="false" />
+   <field name="sent_index" type="tint" indexed="true" stored="true" multiValued="false" />
 
    <!--
      Some fields such as popularity and manu_exact could be modified to
@@ -524,13 +525,13 @@
     <!-- MMSeg4j Analyzer -->
     <fieldType name="text_zh" class="solr.TextField" positionIncrementGap="100">
         <analyzer type="index">
-            <tokenizer class="cc.pp.analyzer.mmseg4j.solr.MMSegTokenizerFactory" mode="complex" dicPath="mmseg4j_dic"/>
+            <tokenizer class="cc.pp.analyzer.mmseg4j.solr.MMSegTokenizerFactory" mode="max-word" dicPath="mmseg4j_dic"/>
             <filter class="solr.LowerCaseFilterFactory"/>
             <filter class="cc.pp.analyzer.mmseg4j.solr.CutLetterDigitFilterFactory"/>
             <filter class="solr.StopFilterFactory" ignoreCase="true" words="stopwords_zh.txt"/>
         </analyzer>
         <analyzer type="query">
-            <tokenizer class="cc.pp.analyzer.mmseg4j.solr.MMSegTokenizerFactory" mode="complex" dicPath="mmseg4j_dic"/>
+            <tokenizer class="cc.pp.analyzer.mmseg4j.solr.MMSegTokenizerFactory" mode="max-word" dicPath="mmseg4j_dic"/>
             <filter class="solr.LowerCaseFilterFactory"/>
             <filter class="cc.pp.analyzer.mmseg4j.solr.CutLetterDigitFilterFactory"/>
             <filter class="solr.StopFilterFactory" ignoreCase="true" words="stopwords_zh.txt"/>
