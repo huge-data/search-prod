@@ -39,7 +39,7 @@ install() {
 start() {
     MASTER=`cat master`;
     echo $MASTER": start master ...";
-    ssh $MASTER "cd solr-cloud/solr-"$SOLR_VERSION";java -Xms8192M -Xmx10240M -Dbootstrap_confdir=./solr/sentiment/conf -Dcollection.configName=zxsoft -DnumShards=6 -DzkHost=192.168.43.201:2181,192.168.43.100:2181,192.168.43.101:2181,192.168.43.111:2181,192.168.43.121:2181,192.168.43.131:2181 -jar start.jar &" &
+    ssh $MASTER "cd solr-cloud/solr-"$SOLR_VERSION";java -Xms8192M -Xmx10240M -Dbootstrap_confdir=./solr/sentiment/conf -Dcollection.configName=zxsoft -DnumShards=5 -DzkHost=192.168.43.201:2181,192.168.43.100:2181,192.168.43.101:2181,192.168.43.111:2181,192.168.43.121:2181 -jar start.jar &" &
     echo "sleeping ..."
 
     for ((i=60;i>0;i--))
@@ -50,7 +50,7 @@ start() {
     for i in `cat slaves`;
     do
         echo $i": start slave ...";
-        ssh $i "cd solr-cloud/solr-"$SOLR_VERSION";java -Xms8192M -Xmx10240M -DzkHost=192.168.43.201:2181,192.168.43.100:2181,192.168.43.101:2181,192.168.43.111:2181,192.168.43.121:2181,192.168.43.131:2181 -jar start.jar &" &
+        ssh $i "cd solr-cloud/solr-"$SOLR_VERSION";java -Xms8192M -Xmx10240M -DzkHost=192.168.43.201:2181,192.168.43.100:2181,192.168.43.101:2181,192.168.43.111:2181,192.168.43.121:2181 -jar start.jar &" &
     done;
 }
 
