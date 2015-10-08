@@ -1,7 +1,5 @@
-username@server_ip_slave
-username@server_ip_slave
-username@server_ip_slave
-...
-username@server_ip_slave
-username@server_ip_slave
-username@server_ip_slave
+solr@hefei12
+solr@hefei13
+solr@hefei14
+solr@hefei16
+solr@hefei17

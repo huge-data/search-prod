@@ -1,7 +1,7 @@
 
 # 大数据搜索服务项目
 
-> 基于Java实现，solr版本为5.1.0。
+> 基于Java实现，适用于GBXM。
 
 ## 一、ZookeeperCloud
 
